@@ -8,14 +8,14 @@ using namespace std;
 
 class TestCase{
     public:
-        //string msg;
+        string msg;
         ostream& out;
 
         int failed, passed, total;
 
         TestCase (string nameOfCheck , ostream& os): out(os),failed(0),passed(0),total(0){
-            out << nameOfCheck;
-            //msg = nameOfCheck;
+            //out << nameOfCheck;
+            msg = nameOfCheck;
         }
 
         template <typename T> TestCase& check_equal(T x, T y){
@@ -25,7 +25,7 @@ class TestCase{
             }
             else{
                 failed ++;
-                out <<  ": Failure in test #" << total << ":" << x << " should equal " << y << "!" << endl;
+                out << msg << ": Failure in test #" << total << ":" << x << " should equal " << y << "!" << endl;
             }
             return *this;
         }
@@ -36,7 +36,7 @@ class TestCase{
                 passed ++;
             }
             else{
-                out << ": Failure in test #" << total << ":" << x << " should different " << y << "!" <<endl; 
+                out << msg << ": Failure in test #" << total << ":" << x << " should different " << y << "!" <<endl; 
                 failed ++;
             }
             return *this;
@@ -49,7 +49,7 @@ class TestCase{
             }
             else{
                 failed ++;
-                out << ": Failure in test #" << total << ": Function should return " << y << " but returned " << func(x) << "!" <<endl; 
+                out << msg << ": Failure in test #" << total << ": Function should return " << y << " but returned " << func(x) << "!" <<endl; 
 
             }
             return *this;
@@ -64,14 +64,14 @@ class TestCase{
             }
             else{
                 failed++;
-                out << ": Failure in test #" << total << ": string value should be " << y << " but is " << ss.str() << endl;
+                out << msg << ": Failure in test #" << total << ": string value should be " << y << " but is " << ss.str() << endl;
             }
             return *this;
         }
 
 
         void print(){
-            out << failed << " failed, " << passed << " passed, " << total << " total." << endl << "---" << endl;
+            out << msg << failed << " failed, " << passed << " passed, " << total << " total." << endl << "---" << endl;
         }
 
 
